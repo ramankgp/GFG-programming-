@@ -6,6 +6,12 @@ https://www.geeksforgeeks.org/find-paths-given-source-destination/
 
 https://www.geeksforgeeks.org/find-paths-given-source-destination/
 
+The idea is to do Depth First Traversal of given directed graph.
+Start the DFS traversal from source.
+Keep storing the visited vertices in an array or HashMap say ‘path[]’.
+If the destination vertex is reached, print contents of path[].
+The important thing is to mark current vertices in the path[] as visited also so that the traversal doesn’t go in a cycle.
+
 def DFSPathUtil(graph,paths, curr_path, visited,curr,d):
   visited[curr] = True
   curr_path.append(curr)
