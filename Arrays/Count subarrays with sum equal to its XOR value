@@ -1,0 +1,71 @@
+Given an array arr[] containing N elements, the task is to count the number of sub-arrays whose XOR of all the elements is equal to the sum of 
+all the elements in the subarray.
+
+
+
+
+1.The idea is to use the concept of sliding window. First, we calculate the window for which the above condition is satisfied and then we slide through every element 
+till N. The following steps can be followed to compute the answer:
+
+2. Maintain two pointers left and right initially assigned to zero.
+3. Calculate the window using right pointer where the condition A xor B = A + B is satisfied.
+4. Count of the sub-arrays will be right – left.
+5.  through every element and remove the previous element.
+
+
+
+// C++ program to count the number 
+// of subarrays such that Xor of 
+// all the elements of that subarray 
+// is equal to sum of the elements 
+
+#include <bits/stdc++.h> 
+#define ll long long int 
+using namespace std; 
+
+// Function to count the number 
+// of subarrays such that Xor of 
+// all the elements of that subarray 
+// is equal to sum of the elements 
+ll operation(int arr[], int N) 
+{ 
+	// Maintain two pointers 
+	// left and right 
+	ll right = 0, ans = 0, 
+	num = 0; 
+
+	// Iterating through the array 
+	for (ll left = 0; left < N; left++) { 
+
+		// Calculate the window 
+		// where the above condition 
+		// is satisfied 
+		while (right < N 
+			&& num + arr[right] 
+					== (num ^ arr[right])) { 
+			num += arr[right]; 
+			right++; 
+		} 
+
+		// Count will be (right-left) 
+		ans += right - left; 
+		if (left == right) 
+			right++; 
+
+		// Remove the previous element 
+		// as it is already included 
+		else
+			num -= arr[left]; 
+	} 
+
+	return ans; 
+} 
+
+// Driver code 
+int main() 
+{ 
+	int arr[] = { 1, 2, 3, 4, 5 }; 
+	int N = sizeof(arr) / sizeof(arr[0]); 
+
+	cout << operation(arr, N); 
+} 
